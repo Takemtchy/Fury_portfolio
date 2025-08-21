@@ -50,16 +50,23 @@ body::-webkit-scrollbar { display: none; } /* WebKit hide scrollbar */
     margin-top: -150px;
 }
 .hero h1{
-    font-size: 38px;
+    font-size: 28px;
     font-weight: 600;
-}
-.hero p{
-    font-size: 18px;
-    font-weight: 300;
-    opacity: 100%;
-    margin-top: 25px;
+    font-family:monospace;
 }
 
+.hero p{
+  font-size: 16px;
+  font-weight: 300;
+  opacity: 70%;
+  margin-top: 25px;
+  font-family:monospace;
+}
+
+.hero span{
+  opacity: 100%;
+  font-weight: 400;
+}
 
 /* --- Pinned section --- */
 .scroll-section {
