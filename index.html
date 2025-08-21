@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Works</title>
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+<body>
+
+  <!-- Pinned/animated section -->
+  <section class="scroll-section">
+    <div class="content">
+      <div class="inner">
+        <nav class="nav">
+          <ul class="nav-items">
+            <div class="nav-items-1">
+              <li><a href="https://www.youtube.com/@furyxzia" target="_blank">Youtube <i class="fa-brands fa-youtube"></i></i></a></li>
+              <li><a href="https://www.instagram.com/furyxzia" target="_blank">INSTAGRAM <i class="fa-brands fa-instagram"></i></a></li>
+            </div>
+            <div class="nav-items-2">
+              <li><a href="https://www.tiktok.com/@furyxzia?lang=en" target="_blank">TIKTOK <i class="fa-brands fa-tiktok"></i></a></li>
+              <li><a href="https://x.com/Furyxzia" target="_blank">X <i class="fa-brands fa-twitter"></i></a></li>
+            </div>
+          </ul>
+        </nav>
+
+        <div class="hero">
+          <h1>Shaping Stories Through Abstract Art <br> One Frame at a Time</h1>
+          <p>
+            Hey, I’m furyxzia , a 20-year-old visual artist and creator. <br>
+            I’m completely self-taught and design isn’t just about visuals it’s about emotion, storytelling,<br>
+            and leaving an impact. I love creating videos as I get to express what I’m feeling <br>
+            and share it with people who connect to it.<br>
+            I am working on bigger projects while continuing to evolve both as an artist and as a person.<br>
+            My journey is all about growth, creativity, and expression and I’m just getting started. <br>
+          </p>
+        </div>
+
+        <div class="scroll-container">
+          <div class="scroll-down">Scroll down</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-panel">
+      <video src="bg-video.mp4" autoplay muted loop playsinline></video>
+    </div>
+
+    <div class="hero-overlay-wrapper" aria-hidden="true">
+      <div class="hero-overlay" role="region" aria-label="Hero overlay">
+        <div class="hero-overlay-content">
+          <h2>Your Overlay Title</h2>
+          <p>This text sits above the video with a semi-transparent background.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Works Section -->
+  <section id="works" class="works-section">
+    <div class="container">
+      <div class="works-header">
+        <h2 class="title">MY WORKS</h2>
+        <div id="filters" class="filters" aria-label="Category filters"></div>
+      </div>
+
+      <div id="grid" class="grid"></div>
+      <div id="sentinel" class="sentinel" aria-hidden="true"></div>
+    </div>
+
+    <button id="scrollUp" class="scroll-up" aria-label="Scroll to start of this section" title="Back to section start">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 14l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </section>
+
+  <!-- Overlay Modal (for clicking cards) -->
+  <div id="overlay" class="overlay" aria-hidden="true">
+    <div class="overlay-backdrop"></div>
+    <div class="overlay-content" role="dialog" aria-modal="true" aria-label="Video viewer">
+      <button class="overlay-close" id="overlayClose" aria-label="Close">&times;</button>
+      <div id="overlayStage" class="overlay-stage"></div>
+      <p class="overlay-hint">Click on the video to play/pause. Click the button to play Audio --></p>
+    </div>
+  </div>
+
+  <!-- GSAP (single include) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <script src="db.js" defer></script>
+  <script src="app.js" defer></script>
+</body>
+</html>

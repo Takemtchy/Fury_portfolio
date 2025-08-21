@@ -1,0 +1,442 @@
+/* ============ Base ============ */
+*{box-sizing:border-box}
+:root{
+  --bg:#ffffff;
+  --text:#0d0d0d;
+  --muted:#888;
+  --pill-bg:#f0f2f5;
+  --pill-active:#111827;
+  --pill-active-text:#fff;
+  --shadow: 0 8px 24px rgba(0,0,0,0.06);
+  
+}
+body{
+  overflow-x: hidden;               /* prevent horizontal scroll */
+  -ms-overflow-style: none;         /* IE/Edge hide scrollbar */
+  scrollbar-width: none; 
+}
+body::-webkit-scrollbar { display: none; } /* WebKit hide scrollbar */  
+
+.nav{
+    display: flex;
+}
+
+.nav-items{
+  display: flex;
+  list-style: none;
+  gap: 106px;
+  margin-top: -350px;
+  margin-left: -100px;
+  font: bold;
+}
+
+
+.nav-items li{
+    display: flex;
+  font-size: 24px;
+  font-weight: 700;
+  padding-bottom: 20px;
+}
+.nav-items a{
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  opacity: 95%;
+}
+
+.hero{
+    position: absolute;
+    left: 0;
+    margin-left: 100px;
+    margin-top: -150px;
+}
+.hero h1{
+    font-size: 38px;
+    font-weight: 600;
+}
+.hero p{
+    font-size: 18px;
+    font-weight: 300;
+    opacity: 100%;
+    margin-top: 25px;
+}
+
+
+/* --- Pinned section --- */
+.scroll-section {
+  position: relative;
+  height: 100vh;                    /* pinned viewport height */
+  display: flex;
+  align-items: stretch;
+  background-color: #ffffff;                 /* avoids any flash */
+  isolation: isolate;               /* for clean z-index stacking */
+}
+
+/* Left content (visible at start) */
+.content {
+  flex: 0 0 50vw;                   /* left half */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: #000000;
+  background: #ffffff;
+  z-index: 1;                       /* under video when it expands */
+}
+.content .inner {
+  max-width: 42ch;
+  line-height: 1.5;
+  opacity: 0.95;
+}
+
+/* Right video panel (starts at right half, then grows) */
+.video-panel {
+  position: absolute;
+  inset: 0 auto 0 50vw;             /* top:0; right:auto; bottom:0; left:50vw */
+  width: 50vw;                      /* start as right half */
+  height: 100vh;
+  z-index: 2;                       /* above content */
+  overflow: hidden;
+  border-radius: 0;                 
+  will-change: width, left;         
+  background: #ffffff;                 
+}
+.video-panel video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* After section (normal scroll resumes) */
+.after {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  color: #fff;
+  font-size: 2rem;
+  padding: 2rem;
+}
+
+@media (max-width: 768px) {
+  .content { flex-basis: 55vw; padding: 1.5rem; }
+  .content .inner { font-size: 0.95rem; }
+}
+/* Overlay above the video */
+/* wrapper keeps the element centered via CSS only */
+.hero-overlay-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* keeps center locked */
+  z-index: 5;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* wrapper itself doesn't intercept pointer events */
+}
+
+/* the card that GSAP will animate */
+.hero-overlay {
+  pointer-events: auto;     /* make the visible card interactive */
+  width: 0;
+  height: 0;
+  opacity: 0;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: width, height, opacity, transform, filter;
+  max-width: 90vw;
+  max-height: 85vh;
+}
+
+.hero-overlay-content {
+  padding: 1.25rem 1.5rem;
+  max-width: 80ch;
+  text-align: center;
+}
+
+
+.scroll-container{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-left: 100px;
+    margin-bottom: 100px;
+}
+
+.scroll-down {
+  display: inline-block;
+  padding: 12px 24px;
+  background: #ffffff;
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  cursor: default;
+  animation: jump 1.8s cubic-bezier(0.28, 0.84, 0.42, 1) infinite;
+}
+
+@keyframes jump {
+  0%   { transform: translateY(0); }
+  20%  { transform: translateY(-15px) scale(1.05); }
+  40%  { transform: translateY(5px) scale(0.98); }
+  60%  { transform: translateY(-8px) scale(1.02); }
+  80%  { transform: translateY(2px); }
+  100% { transform: translateY(0); }
+}
+
+
+html, body { height: 100%; }
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Noto Sans, "Apple Color Emoji","Segoe UI Emoji";
+  color:var(--text);
+  background:var(--bg);
+  line-height:1.5;
+}
+
+/* Fake content above */
+.page-header{
+  padding:48px 0;
+  border-bottom:1px solid #eee;
+}
+.container{
+  width:min(1100px, 92%);
+  margin-inline:auto;
+}
+
+/* ============ Works Section ============ */
+.works-section{
+  position:relative;
+  padding:56px 0 160px;
+}
+.works-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+}
+@media (max-width: 900px){
+  .works-header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:12px;
+  }
+}
+.title{
+  font-size: clamp(28px, 3.6vw, 46px);
+  letter-spacing:0.02em;
+  margin:0;
+}
+.filters{
+  margin-top:2px;
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+.filter-pill{
+  text-transform:uppercase; /* capped */
+  font-weight:600;
+  font-size:clamp(13px, 1.3vw, 15px); /* bigger */
+  padding:10px 14px; /* bigger */
+  border-radius:999px;
+  border:1px solid #e5e7eb;
+  background:var(--pill-bg);
+  color:#111827;
+  cursor:pointer;
+  transition:transform .14s ease, background .22s ease, color .22s ease, border-color .22s ease, box-shadow .22s ease;
+  user-select:none;
+}
+.filter-pill:hover{ transform:translateY(-1px); }
+.filter-pill.active{
+  background:#3b82f6; /* blue */
+  color:#fff;
+  border-color:#3b82f6;
+  box-shadow: 0 6px 14px rgba(59,130,246,0.25);
+}
+
+/* Grid */
+.grid{
+  margin-top:28px;
+  display:grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap:22px;
+}
+@media (max-width: 1100px){
+  .grid{ grid-template-columns: repeat(8, 1fr); }
+}
+@media (max-width: 720px){
+  .grid{ grid-template-columns: repeat(4, 1fr); gap:14px; }
+}
+.card{
+  grid-column: span 4; /* 3 columns on desktop */
+  border-radius:3px;
+  overflow:hidden;
+  background:#fff; /* lighter background */
+  position:relative;
+  box-shadow: var(--shadow);
+  aspect-ratio: 16 / 9;
+ 
+  border:1px solid rgba(17,24,39,0.08); /* subtle/soft border */
+}
+.card:hover{
+  border-color: rgba(17,24,39,0.14);
+   cursor: pointer;
+}
+.card .thumb{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+  opacity:0;
+  transition: opacity .25s ease;
+}
+.card.loaded .thumb{ opacity:1; }
+
+/* Skeleton shimmer while thumbnail loads */
+.card::before{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(90deg,#eef0f3 25%,#f7f8fa 37%,#eef0f3 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+}
+.card.loaded::before{ display:none; }
+@keyframes shimmer{
+  0%{ background-position: 100% 0; }
+  100%{ background-position: -100% 0; }
+}
+
+/* Scroll Up button fixed on right side of screen */
+.scroll-up{
+  position:fixed;
+  right:24px;
+  bottom:24px;
+  z-index:100;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:54px; height:54px; /* square */
+  border-radius:16px; /* rounded corners */
+  border:1px solid rgba(0,0,0,0.08);
+  cursor:pointer;
+  color:white;
+  background:#3b82f6;
+  box-shadow: 0 10px 24px rgba(59,130,246,0.25), 0 1px 0 rgba(255,255,255,0.3) inset;
+  /* hidden by default when section not visible */
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity .22s ease, transform .22s ease, box-shadow .18s ease;
+}
+
+.scroll-up.visible{
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* ============ Overlay ============ */
+.overlay{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:80;
+  cursor: pointer;
+}
+.overlay.active{ display:flex; }
+
+.overlay-backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(186, 186, 186, 0.323);
+  backdrop-filter: blur(1px);
+}
+
+.overlay-content{
+  position:relative;
+  width: min(1200px, 70vw);
+  aspect-ratio: 16 / 9; /* keep player in 16:9 to avoid letterboxes */
+  max-height: 80vh; /* don't exceed viewport height */
+  background:#000;
+  border-radius:3px;
+  overflow:hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,.45);
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  justify-content:stretch;
+}
+.overlay-close{
+  position:absolute;
+  top:10px; right:10px;
+  font-size:28px;
+  line-height:1;
+  border:none;
+  background:transparent;
+  color:#fff;
+  cursor:pointer;
+  z-index:3;
+}
+.overlay-stage{
+  position:relative;
+  flex:1;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.overlay-stage video,
+.overlay-stage iframe{
+  width:100%;
+  height:100%;
+  border:0;
+  background:#000;
+  object-fit:cover; /* fill, may crop slightly but removes black bars */
+}
+
+/* YouTube container: make iframe behave like object-fit:cover */
+#yt-player-container{ position:absolute; inset:0; overflow:hidden; }
+#yt-player-container iframe{ position:absolute; top:50%; left:50%; width:177.78%; height:100%; transform:translate(-50%,-50%); }
+
+.overlay-hint{
+  margin:8px 0 12px;
+  color:#d1d5db;
+  text-align:center;
+  font-size:12px;
+  
+}
+
+/* Sentinel spacing */
+.sentinel{ height: 40px; }
+
+
+/* Enable sound prompt inside overlay */
+.sound-prompt{
+  position:absolute;
+  right:18px;
+  bottom:18px;
+  z-index:120;
+  padding:10px 14px;
+  border-radius:12px;
+  border:none;
+  background:#3b82f6;
+  color:#fff;
+  font-weight:700;
+  font-size:13px;
+  box-shadow: 0 10px 30px rgba(59,130,246,0.22);
+  cursor:pointer;
+}
+.sound-prompt:active{ transform:translateY(1px); }
+
+.scroll-up.visible:hover{ filter: brightness(0.95); transform: translateY(-2px); }
